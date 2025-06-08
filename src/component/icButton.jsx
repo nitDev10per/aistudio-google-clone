@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 
-const IcButton = ({icon, name, iconOnly=true, clicked=false}) => {
+const IcButton = ({icon, name, iconOnly=true, clicked=false, onClick=()=>{}, className=''}) => {
   const [hover, setHover] = useState(false);
 
   const handleHover = useCallback((val) => {
@@ -8,7 +8,8 @@ const IcButton = ({icon, name, iconOnly=true, clicked=false}) => {
   },[])
   return (
     <div 
-    className={`flex items-center justify-start gap-2 ${(hover || clicked)? 'bg-hoverC' : ''} rounded-3xl px-2 py-2 h-min ${!iconOnly? 'w-full pl-3' : 'w-min'} overflow-x-hidden`}
+    onClick={()=>onClick()}
+    className={`flex items-center justify-start gap-2 ${(hover || clicked)? 'bg-hoverC' : ''} rounded-3xl px-2 py-2 h-min ${!iconOnly? 'w-full pl-3' : 'w-min'} overflow-hidden ${className} cursor-pointer`}
     onMouseEnter={()=>handleHover(true)}
     onMouseLeave={()=>handleHover(false)}
     >

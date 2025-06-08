@@ -16,6 +16,12 @@ module.exports = {
     borderRadius: {
       lgx: "1rem",
     },
+    screens: {
+      'max1020': { 'max': '1020px' },
+      'max769': { 'max': '769px' },
+      'max750': { 'max': '750px' },
+      'max435': { 'max': '435px' },
+    },
   },
   },
   plugins: [],
