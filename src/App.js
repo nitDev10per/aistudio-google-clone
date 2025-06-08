@@ -46,7 +46,7 @@ function App() {
     setOpenSidebar((prev) => !prev);
   };
   return (
-    <div className='h-screen w-screen bg-windowC text-textC flex justify-center items-center overflow-x-hidden relative'>
+    <div className='h-screen w-screen bg-windowC text-textC flex justify-center items-center overflow-hidden relative'>
       {/* left bar */}
       <div ref={elementRef} 
       className={!menuOpen ? `h-full ${openSidebar ? 'w-full max769:min-w-0 max769:w-0' : 'w-0 max769:min-w-0 max769:w-0'} max-w-52 min-w-16 flex flex-col justify-start gap-2 relative ${openSidebar ? 'p-4 max769:p-0' : 'p-0'} onResponsiveLeftSift overflow-y-auto overflow-x-hidden` : 'h-full w-full max-w-52 flex flex-col justify-start gap-2 absolute left-0 top-0 z-10 bg-windowC p-4 overflow-y-auto overflow-x-hidden'}>
@@ -55,7 +55,7 @@ function App() {
         </div>
         <Sidebar iconOnly={openSidebar ? false : true} />
         <div className='h-min w-min bg-cardC rounded-3xl absolute bottom-10 right-0 translate-x-[50%] z-10 max769:hidden'>
-          <IcButton className='mr-4' onClick={handleSidebarToggle} />
+          <IcButton className='mr-4' onClick={handleSidebarToggle} name={!openSidebar ? 'arrowR' : 'arrowL'} clicked={false}/>
         </div>
        {width <= 769 && <IcButton
           icon={'/assets/icons/plus.svg'}
@@ -69,7 +69,7 @@ function App() {
         {/* top bar */}
         <Topbar onMenuClick={handleMenuClick} setStudio={setStudio}/>
         {/* main content */}
-        <div className='w-full flex-1 flex justify-center items-center relative'>
+        <div className='w-full h-full flex-1 flex justify-center items-center relative overflow-hidden'>
           {studio? <Home openSidebar={openSidebar}/> : <Dashboard/>}
           <RightSidebar className='max-w-16 onResponsiveRightSift' iconOnly={true} />
 

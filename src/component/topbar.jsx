@@ -9,8 +9,8 @@ const Topbar = ({ onMenuClick, setStudio }) => {
 
   return (
     <div className='w-full h-16 hoz-diff-item-align px-[14px] py-2'>
-      <IcButton icon={'/assets/icons/plus.svg'}
-        name={'New chat'}
+      <IcButton icon={''}
+        name={'Menu'}
         iconOnly={true}
         clicked={true}
         className='max769:visible invisible'
@@ -18,16 +18,12 @@ const Topbar = ({ onMenuClick, setStudio }) => {
       />
       <div className='hoz-same-item-align'>
         {width > 768 && <IcButton
-          icon={'/assets/icons/plus.svg'}
+          icon={'Get API Key'}
           name={'Get Api Key'}
           iconOnly={false}
           clicked={true}
           onClick={() => {
-            if (isSidebarOpen === 'setting') {
-              setSidebarOpen(false)
-            } else {
-              setSidebarOpen('setting')
-            }
+          
           }}
           className='w-max'
         />}
@@ -35,19 +31,19 @@ const Topbar = ({ onMenuClick, setStudio }) => {
         {width > 768 && <button onClick={()=>{setStudio(false)}}>Dashboard</button>}
         {width > 768 && <button>Documentation</button>}
         {width <= 768 && <IcButton
-          icon={'/assets/icons/plus.svg'}
-          name={'New chat'}
+          icon={'Edit'}
+          name={'Edit'}
           iconOnly={true}
-          clicked={true}
+          clicked={false}
           onClick={() => {
             // setSidebarOpen(prev=>!prev)
           }}
         />}
         {width <= 768 && <IcButton
-          icon={'/assets/icons/plus.svg'}
-          name={'New chat'}
+          icon={'Slider'}
+          name={'Run Settings'}
           iconOnly={true}
-          clicked={true}
+          clicked={false}
           onClick={() => {
             if (isSidebarOpen === 'setting') {
               setSidebarOpen(false)
@@ -57,17 +53,17 @@ const Topbar = ({ onMenuClick, setStudio }) => {
           }}
         />}
         <IcButton
-          icon={'/assets/icons/plus.svg'}
+          icon={'Settings'}
           name={'New chat'}
           iconOnly={true}
-          clicked={true}
+          clicked={false}
           onClick={() => {
             // setSidebarOpen(prev=>!prev)
           }}
         />
         {width > 768 && <IcButton
-          icon={'/assets/icons/plus.svg'}
-          name={'New chat'}
+          icon={'user@...'}
+          name={'user@...'}
           iconOnly={true}
           clicked={true}
           onClick={() => {

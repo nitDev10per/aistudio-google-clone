@@ -7,10 +7,10 @@ const RightSidebar = ({ className = '', iconOnly = false }) => {
   return (
     <div className={`min-w-16 w-full h-full flex flex-col justify-start gap-4 items-center ${className} `}>
       <IcButton
-        icon={''}
-        name={'Chat'}
-        iconOnly={iconOnly}
-        clicked={true}
+        icon={'Slider'}
+        name={'Run Setting'}
+        iconOnly={true}
+        clicked={false}
         onClick={() => {
           if(isSidebarOpen==='setting'){
             setSidebarOpen(false)
@@ -20,10 +20,10 @@ const RightSidebar = ({ className = '', iconOnly = false }) => {
         }}
       />
       <IcButton
-        icon={''}
-        name={'Chat'}
-        iconOnly={iconOnly}
-        clicked={true}
+        icon={'Structured Output'}
+        name={'Prompts Gallery'}
+        iconOnly={true}
+        clicked={false}
         onClick={() => {
           if(isSidebarOpen==='penal'){
             setSidebarOpen(false)

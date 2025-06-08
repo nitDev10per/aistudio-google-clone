@@ -5,8 +5,10 @@ import { Copy, Download, Plus } from "lucide-react";
 const Dashboard = () => {
     return (
         /* container */
-        <div className="h-full w-full overflow-hidden">
-            <div className="bg-cardC rounded-3xl w-full lex-1 h-max overflow-y-auto p-8 text-[#E8EAED]">
+        <div className="h-full w-full overflow-auto" style={{
+            scrollbarWidth: 'none'
+        }}>
+            <div className="bg-cardC rounded-3xl w-full lex-1 h-max p-8 text-[#E8EAED]">
                 {/* top-bar */}
                 <div className="flex items-center justify-between mb-10">
                     <h1 className="text-3xl font-semibold">API Keys</h1>

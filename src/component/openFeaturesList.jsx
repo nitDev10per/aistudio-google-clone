@@ -19,7 +19,7 @@ const OpenFeaturesList = ({items, title='', openFeature=true, navButtonType=fals
     <div className="h-max w-full">
       {openFeature && <div className="hoz-diff-item-align py-1">
         <h5>{title}</h5>
-        <IcButton onClick={()=>handleToggle()}/>
+        <IcButton onClick={()=>handleToggle()} name={!open? 'arrowD' : 'arrowU'}/>
       </div>}
       {(!openFeature && title) && <h5 className='mb-3'>{title}</h5>}
 

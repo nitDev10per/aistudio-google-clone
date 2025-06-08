@@ -18,7 +18,7 @@ const Sidebar = ({ className = '', iconOnly = false }) => {
     },
     {
       icon: '',
-      name: 'Genrate Media'
+      name: 'Generate Media'
     },
     {
       icon: '',
@@ -87,7 +87,7 @@ const Sidebar = ({ className = '', iconOnly = false }) => {
 
      {iconOnly? <IcButton
         icon={''}
-        name={'Chat'}
+        name={'AlertCircle'}
         iconOnly={iconOnly}
         clicked={false}
       />: <p className='text-[12px] '> This model is not stable and may not be suitable for production use. <a href="https://ai.google.dev/gemini-api/docs/models#model-versions" target="blank" className='text-buttonC'>Learn more</a></p>}

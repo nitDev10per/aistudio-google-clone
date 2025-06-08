@@ -25,6 +25,16 @@ const Home = ({ openSidebar }) => {
         ['toggle', <ToggleButton />],
     ]);
 
+    const button = [
+        'System instructions',
+        'Get SDK code to chat with Gemini',
+        'You need to create and run a prompt in order to share it',
+        'No changes to save',
+        'Compare mode',
+        'Clear chat',
+        'View more actions'
+    ]
+
 
     const cardData = [
         {
@@ -133,41 +143,27 @@ const Home = ({ openSidebar }) => {
                 <div className='hoz-diff-item-align border-b border-hoverC w-full pb-6'>
                     <h1>Chat Prompt</h1>
                     <div className='hoz-same-item-align'>
-                        <IcButton
-                            icon={''}
-                            name={'Chat'}
-                            iconOnly={true}
-                            clicked={true}
-                        />
-                        <IcButton
-                            icon={''}
-                            name={'Chat'}
-                            iconOnly={true}
-                            clicked={true}
-                        />
-                        <IcButton
-                            icon={''}
-                            name={'Chat'}
-                            iconOnly={true}
-                            clicked={true}
-                        />
-                        <IcButton
-                            icon={''}
-                            name={'Chat'}
-                            iconOnly={true}
-                            clicked={true}
-                        />
+                        { button.map((item, i) => {
+                            return <IcButton
+                                key={i + 'button'}
+                                icon={''}
+                                name={item}
+                                iconOnly={true}
+                                clicked={false}
+                                className='max769:hidden'
+                            />
+                        })}
                     </div>
                 </div>
 
                 <div className='w-full flex-1 h-full vtl-same-item-align overflow-y-auto'>
                     <div className='vtl-same-item-align gap-8 w-full flex-1 h-max max435:mb-12'>
                         <h1 className='text-4xl text-buttonC text-center'>Welcome To Ai Studio</h1>
-                        <div className='hoz-same-item-align gap-0 py-3 px-4 max-w-2xl w-full bg-hoverC rounded-[30px] max435:absolute max435:bottom-0 z-10'>
+                        <div className='hoz-same-item-align gap-0 py-3 px-4 max-w-2xl w-full bg-hoverC rounded-[30px] max435:absolute max435:bottom-0 z-[5]'>
                             <input type='text' className='flex-1 bg-transparent border-none focus:border-none h-max p-0 w-full min-w-0' placeholder='Type your prompt here...' onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
                             <IcButton
                                 icon={''}
-                                name={'Chat'}
+                                name={'Plus'}
                                 iconOnly={true}
                                 clicked={true}
                             />
@@ -200,8 +196,8 @@ const Home = ({ openSidebar }) => {
                     <h1>Run Setting</h1>
                     <div className='hoz-same-item-align'>
                         <IcButton
-                            icon={'/assets/icons/plus.svg'}
-                            name={'close'}
+                            icon={''}
+                            name={'Close Panel'}
                             iconOnly={true}
                             clicked={false}
                             onClick={() => {
