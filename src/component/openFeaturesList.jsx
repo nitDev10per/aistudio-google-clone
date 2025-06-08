@@ -1,12 +1,14 @@
 import React, { use, useCallback } from 'react';
 import IcButton from './icButton';
 import ToggleButton from './toggleButton';
+import Card from './card';
 
 const OpenFeaturesList = ({items, title='', openFeature=true, navButtonType=false, onClickButton=()=>{}, selectedButton}) => {
   const [open, setOpen] = React.useState(true);
   // 1. Map needs an iterable of entries
   const actionTypeMap = new Map([
     ['toggle', <ToggleButton />],
+    ['card', <Card/>]
   ]);
 
   const handleToggle = useCallback(() => {

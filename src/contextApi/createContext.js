@@ -5,6 +5,7 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isSidePenalOpen, setIsSidePenalOpen] = useState(false);
   const [theme, setTheme] = useState('light');
   const [user, setUser] = useState(null);
 
@@ -12,6 +13,7 @@ export const AppProvider = ({ children }) => {
     <AppContext.Provider value={{
       // State values
       isSidebarOpen, setSidebarOpen,
+      isSidePenalOpen, setIsSidePenalOpen,
       theme, setTheme,
       user, setUser
     }}>

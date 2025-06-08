@@ -11,7 +11,7 @@ module.exports = {
       buttonC: "#87A9FF",
       textC: '#9E9E9E',
       cardC: '#1E1E1E',
-
+      btnTextC:'#002C95',
     },
     borderRadius: {
       lgx: "1rem",
@@ -19,8 +19,8 @@ module.exports = {
     screens: {
       'max1020': { 'max': '1020px' },
       'max769': { 'max': '769px' },
-      'max750': { 'max': '750px' },
-      'max435': { 'max': '435px' },
+      'max550': { 'max': '750px' },
+      'max435': { 'max': '545px' },
     },
   },
   },

@@ -1,21 +1,38 @@
 import React from 'react'
 import IcButton from './icButton'
+import { useApp } from '../contextApi/createContext';
 
-const RightSidebar = ({className='', iconOnly=false}) => {
+const RightSidebar = ({ className = '', iconOnly = false }) => {
+  const {isSidebarOpen, setSidebarOpen } = useApp();
   return (
     <div className={`min-w-16 w-full h-full flex flex-col justify-start gap-4 items-center ${className} `}>
-      <IcButton 
-      icon={''}
-      name={'Chat'}
-      iconOnly={iconOnly}
-      clicked={true}
+      <IcButton
+        icon={''}
+        name={'Chat'}
+        iconOnly={iconOnly}
+        clicked={true}
+        onClick={() => {
+          if(isSidebarOpen==='setting'){
+            setSidebarOpen(false)
+          }else{
+            setSidebarOpen('setting')
+          }
+        }}
       />
-      <IcButton 
-      icon={''}
-      name={'Chat'}
-      iconOnly={iconOnly}
-      clicked={true}
+      <IcButton
+        icon={''}
+        name={'Chat'}
+        iconOnly={iconOnly}
+        clicked={true}
+        onClick={() => {
+          if(isSidebarOpen==='penal'){
+            setSidebarOpen(false)
+          }else{
+            setSidebarOpen('penal')
+          }
+        }}
       />
+      
     </div>
   )
 }
