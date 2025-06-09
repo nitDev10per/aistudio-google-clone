@@ -51,7 +51,7 @@ function App() {
       <div ref={elementRef} 
       className={!menuOpen ? `h-full ${openSidebar ? 'w-full max769:min-w-0 max769:w-0' : 'w-0 max769:min-w-0 max769:w-0'} max-w-52 min-w-16 flex flex-col justify-start gap-2 relative ${openSidebar ? 'p-4 max769:p-0' : 'p-0'} onResponsiveLeftSift overflow-y-auto overflow-x-hidden` : 'h-full w-full max-w-52 flex flex-col justify-start gap-2 absolute left-0 top-0 z-10 bg-windowC p-4 overflow-y-auto overflow-x-hidden'}>
         <div className='h-16 w-full flex items-center justify-center '>
-          {openSidebar? <h1 className='text-buttonC text-xl   '>Google AI Studio</h1>: <img src='' className=''/>}
+          {openSidebar? <h1 className='text-buttonC text-xl   '>Google AI Studio</h1>:<div/>}
         </div>
         <Sidebar iconOnly={openSidebar ? false : true} />
         <div className='h-min w-min bg-cardC rounded-3xl absolute bottom-10 right-0 translate-x-[50%] z-10 max769:hidden'>
