@@ -196,7 +196,7 @@ const Home = ({ openSidebar }) => {
         <div className='h-full w-full flex justify-center items-center bg-windowC gap-1 flex-1 overflow-y-hidden'>
 
             {/* chat */}
-            <div className='card-style p-6 h-full flex-1 overflow-y-hidden'>
+            <div className='card-style p-6 h-full flex-1 overflow-hidden'>
                 <div className='hoz-diff-item-align border-b border-hoverC w-full pb-6'>
                     <h1>Chat Prompt</h1>
                     <div className='hoz-same-item-align'>
@@ -219,7 +219,7 @@ const Home = ({ openSidebar }) => {
                             Welcome To Ai Studio
                         </h1>
 
-                        <div className='hoz-same-item-align gap-0 py-3 px-4 mx-[20px] my-0 max-w-2xl w-full bg-hoverC rounded-[30px] max435:fixed max435:bottom-1 z-[5] h-max'>
+                        <div className='hoz-same-item-align gap-0 py-3 px-4 my-0 max-w-2xl w-full bg-hoverC rounded-[30px] max435:fixed max435:bottom-1 z-[5] h-max'>
                             <textarea
                                 className="flex-1 bg-transparent border-none focus:outline-none focus:border-none resize-none w-full min-w-0 min-h-max p-0"
                                 placeholder="Type your prompt here..."
