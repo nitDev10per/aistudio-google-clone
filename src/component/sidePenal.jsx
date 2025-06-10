@@ -2,8 +2,10 @@ import React from 'react'
 
 const SidePenal = ({content}) => {
     return (
-        <div className='w-full flex-1 h-full overflow-auto vtl-same-item-align'>
-            <div className='vtl-same-item-align justify-start gap-3 w-full flex-1'>
+        <div className='w-full h-full overflow-auto ' style={{
+            scrollbarWidth:'thin'
+        }}>
+            <div className='vtl-same-item-align justify-start gap-3 w-full h-max p-2'>
                 {content}
             </div>
 

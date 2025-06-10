@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import Card from '../component/card'
 import IcButton from '../component/icButton'
 import OpenFeaturesList from '../component/openFeaturesList'
@@ -8,6 +8,7 @@ import { useApp } from '../contextApi/createContext'
 import useOutSideClick from '../hooks/useOutSideClick'
 import useWindowWidth from '../hooks/useWindowWirth'
 import SidePenal from '../component/sidePenal'
+import RunSettings from '../component/runSetting'
 
 const Home = ({ openSidebar }) => {
     const { isSidebarOpen, setSidebarOpen } = useApp();
@@ -17,6 +18,14 @@ const Home = ({ openSidebar }) => {
         if (
             width <= 768
         ) {
+            setSidebarOpen(false);
+        }
+    }, [width])
+
+    useMemo(() => {
+        if (width > 768) {
+            setSidebarOpen(true);
+        } else {
             setSidebarOpen(false);
         }
     }, [width])
@@ -40,46 +49,89 @@ const Home = ({ openSidebar }) => {
         {
             title: 'Native speech generation',
             decs: 'Generate high quality text to speech with Gemini',
+            img: 'https://www.gstatic.com/aistudio/zero-state/text_soundswave.png'
         },
         {
             title: 'Native speech generation',
             decs: 'Generate high quality text to speech with Gemini',
+            img: 'https://www.gstatic.com/aistudio/zero-state/text_soundswave.png'
         },
         {
             title: 'Native speech generation',
             decs: 'Generate high quality text to speech with Gemini',
+            img: 'https://www.gstatic.com/aistudio/zero-state/text_soundswave.png'
         },
         {
             title: 'Native speech generation',
             decs: 'Generate high quality text to speech with Gemini',
+            img: 'https://www.gstatic.com/aistudio/zero-state/text_soundswave.png'
         },
     ]
 
     const items = [
         {
-            title: 'Tools',
-            type: 'wrap',
+            type: 'single',
             data: [{
-                topLabel: 'TopP',
-                sideLabel: 'URL Context',
-                actions: [{ type: 'toggle' }],
+                actions: [{ type: 'select' }],
             }, {
-                topLabel: 'TopP',
-                sideLabel: 'URL Context',
-                actions: [{ type: 'toggle' }],
+                sideLabel: 'Token count',
+                actions: [{ type: 'text' }],
+            }, {
+                topLabel: 'Temperature',
+                actions: [
+                    { type: 'range' }
+                ],
             }]
         },
         {
             title: 'Thinking',
             type: 'single',
             data: [{
-                topLabel: 'TopP',
-                sideLabel: 'URL Context',
+                sideLabel: 'Thinking mode',
                 actions: [{ type: 'toggle' }],
             }, {
-                topLabel: 'TopP',
-                sideLabel: 'URL Context',
+                sideLabel: 'Set thinking budget',
                 actions: [{ type: 'toggle' }],
+            }]
+        },
+        {
+            title: 'Tools',
+            type: 'wrap',
+            data: [{
+                sideLabel: 'Structured output',
+                actions: [{ type: 'button' }, { type: 'toggle' }],
+            }, {
+                sideLabel: 'Code execution',
+                actions: [{ type: 'toggle' }],
+            }, {
+                sideLabel: 'Function calling',
+                actions: [{ type: 'button' }, { type: 'toggle' }],
+            }, {
+                sideLabel: 'Grounding with Google Search',
+                actions: [{ type: 'toggle' }],
+            }, {
+                sideLabel: 'URL context',
+                actions: [{ type: 'toggle' }],
+            }]
+        },
+        {
+            title: 'Advanced settings',
+            type: 'wrap',
+            data: [{
+                sideLabel: 'Safety settings',
+                actions: [{ type: 'button' }],
+            }, {
+                sideLabel: 'Add Stop Sequences',
+                actions: [{ type: 'toggle' }],
+            }, {
+                topLabel: 'Add step sequences',
+                actions: [{ type: 'input' }],
+            }, {
+                sideLabel: 'output length',
+                actions: [{ type: 'number' }],
+            }, {
+                topLabel: 'Top P',
+                actions: [{ type: 'range' }],
             }]
         },
 
@@ -91,49 +143,54 @@ const Home = ({ openSidebar }) => {
         'Test if AI knows which number is bigger.',
         'Test if AI knows which number is bigger.',
         'Test if AI knows which number is bigger.',
-     
+
     ]
 
     const penalContent = useCallback(() => {
         if (isSidebarOpen === 'setting') {
-            return items.map((item, idx) => {
-                if (item.type === 'wrap') {
-                    return (
-                        <>
-                            <OpenFeaturesList
-                                key={`feature-${idx}`}
-                                items={item.data}
-                                openFeature={true}
-                                title={item.title}
-                            />
-                            <div className='h-[1px] w-full bg-hoverC' />
-                        </>
-                    )
-                } else if (item.type === 'single') {
-                    return (
-                        <>
-                            <OpenFeaturesList
-                                key={`feature-${idx}`}
-                                items={item.data}
-                                openFeature={false}
-                                title={item.title}
-                            />
-                            <div className='h-[1px] w-full bg-hoverC' />
-                        </>
+            return <>
+                {
+                    items.map((item, idx) => {
+                        if (item.type === 'wrap') {
+                            return (
+                                <>
+                                    <OpenFeaturesList
+                                        key={`feature-${idx}`}
+                                        items={item.data}
+                                        openFeature={true}
+                                        title={item.title}
+                                    />
+                                    <div className='h-[1px] w-full bg-hoverC' />
+                                </>
+                            )
+                        } else if (item.type === 'single') {
+                            return (
+                                <>
+                                    <OpenFeaturesList
+                                        key={`feature-${idx}`}
+                                        items={item.data}
+                                        openFeature={false}
+                                        title={item.title}
+                                    />
+                                    <div className='h-[1px] w-full bg-hoverC' />
+                                </>
 
-                    );
+                            );
+                        }
+                        return null;
+                    })
+
                 }
-                return null;
-            })
-        } else{
-            return promptsGalleryData.map((item, idx)=>{
-                return <Card desc={item} key={idx+'promptsGalleryData'} className={'max-h-max'}/>
+            </>
+        } else {
+            return promptsGalleryData.map((item, idx) => {
+                return <Card desc={item} key={idx + 'promptsGalleryData'} className={'max-h-max'} />
             })
         }
 
-    },[isSidebarOpen])
+    }, [isSidebarOpen])
 
-    
+
 
     return (
         <div className='h-full w-full flex justify-center items-center bg-windowC gap-1 flex-1 overflow-y-hidden'>
@@ -143,7 +200,7 @@ const Home = ({ openSidebar }) => {
                 <div className='hoz-diff-item-align border-b border-hoverC w-full pb-6'>
                     <h1>Chat Prompt</h1>
                     <div className='hoz-same-item-align'>
-                        { button.map((item, i) => {
+                        {button.map((item, i) => {
                             return <IcButton
                                 key={i + 'button'}
                                 icon={''}
@@ -156,11 +213,20 @@ const Home = ({ openSidebar }) => {
                     </div>
                 </div>
 
-                <div className='w-full flex-1 h-full vtl-same-item-align overflow-y-auto'>
-                    <div className='vtl-same-item-align gap-8 w-full flex-1 h-max max435:mb-12'>
-                        <h1 className='text-4xl text-buttonC text-center'>Welcome To Ai Studio</h1>
-                        <div className='hoz-same-item-align gap-0 py-3 px-4 max-w-2xl w-full bg-hoverC rounded-[30px] max435:absolute max435:bottom-0 z-[5]'>
-                            <input type='text' className='flex-1 bg-transparent border-none focus:border-none h-max p-0 w-full min-w-0' placeholder='Type your prompt here...' onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
+                <div className='w-full flex-1 h-full overflow-y-auto  grid place-items-center'>
+                    <div className='vtl-same-item-align gap-8 w-full flex-1 h-max max435:mb-12' >
+                        <h1 className="text-4xl text-transparent bg-clip-text text-center bg-gradient-to-r from-slate-200 to-blue-500">
+                            Welcome To Ai Studio
+                        </h1>
+
+                        <div className='hoz-same-item-align gap-0 py-3 px-4 mx-[20px] my-0 max-w-2xl w-full bg-hoverC rounded-[30px] max435:fixed max435:bottom-1 z-[5] h-max'>
+                            <textarea
+                                className="flex-1 bg-transparent border-none focus:outline-none focus:border-none resize-none w-full min-w-0 min-h-max p-0"
+                                placeholder="Type your prompt here..."
+                                rows={1}
+                                onChange={(e) => setInputValue(e.target.value)}
+                                value={inputValue}
+                            />
                             <IcButton
                                 icon={''}
                                 name={'Plus'}
@@ -176,7 +242,7 @@ const Home = ({ openSidebar }) => {
                             }}>
                                 <div className="flex lg:grid lg:grid-cols-2 lg:grid-rows-2 gap-4 lg:w-full max769:grid max769:grid-cols-2 max769:grid-rows-2 max769:w-full  max435:flex max435:w-max">
                                     {cardData.map((item, i) => {
-                                        return <Card key={i + 'cardData'} className={`${openSidebar && isSidebarOpen ? 'min-w-[25vw]' : 'min-w-[30vw]'} lg:min-w-full max435:max-w-[70vw]`} desc={item.decs} img={true} title={item.title} newF={true} />
+                                        return <Card key={i + 'cardData'} className={`${openSidebar && isSidebarOpen ? 'min-w-[25vw]' : 'min-w-[30vw]'} lg:min-w-full max435:max-w-[70vw]`} desc={item.decs} img={item.img} title={item.title} newF={true} />
                                     })}
 
                                 </div>
@@ -191,7 +257,7 @@ const Home = ({ openSidebar }) => {
             </div>
 
             {/* settings penal */}
-            <div ref={elementRef} className={`card-style w-72 p-6 onResponsiveRightSift ${isSidebarOpen ? 'onResponsiveRightVisible ' : 'onResponsiveRightSift hidden'}`}>
+            <div ref={elementRef} className={`card-style w-72 p-4 onResponsiveRightSift ${isSidebarOpen ? 'onResponsiveRightVisible ' : 'onResponsiveRightSift hidden'} overflow-hidden`}>
                 <div className='hoz-diff-item-align w-full'>
                     <h1>Run Setting</h1>
                     <div className='hoz-same-item-align'>
@@ -208,6 +274,7 @@ const Home = ({ openSidebar }) => {
                 </div>
 
                 <SidePenal content={penalContent()} />
+
             </div>
         </div>
     )

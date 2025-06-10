@@ -16,7 +16,7 @@ const IcButton = ({ icon, name, iconOnly = true, clicked = false, onClick = () =
       onMouseEnter={() => handleHover(true)}
       onMouseLeave={() => handleHover(false)}
     >
-      {LucideIcon && <LucideIcon className={`w-5 h-5 ${hover || clicked ? 'text-white' : 'text-textC'}`} />}
+      {LucideIcon && <LucideIcon className={`w-4 h-4 ${hover || clicked ? 'text-white' : 'text-textC'}`} />}
       {!iconOnly && <h3 className={`text-center ${hover || clicked ? 'text-white' : 'text-textC'} text-sm font-semibold`}>{name}</h3>}
     </div>
   )

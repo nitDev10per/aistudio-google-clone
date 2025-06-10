@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from 'react';
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [isSidePenalOpen, setIsSidePenalOpen] = useState(false);
   const [theme, setTheme] = useState('light');
   const [user, setUser] = useState(null);
