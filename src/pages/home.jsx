@@ -213,13 +213,14 @@ const Home = ({ openSidebar }) => {
                     </div>
                 </div>
 
-                <div className='w-full flex-1 h-full overflow-y-auto  grid place-items-center'>
-                    <div className='vtl-same-item-align gap-8 w-full flex-1 h-max max435:mb-12' >
+                <div className='w-full flex-1 h-full overflow-y-auto overflow-x-hidden'>
+                    <div className='vtl-same-item-align w-full min-h-max h-full'>
+                        <div className='vtl-same-item-align gap-8 w-full flex-1 h-max max435:mb-12' >
                         <h1 className="text-4xl text-transparent bg-clip-text text-center bg-gradient-to-r from-slate-200 to-blue-500">
                             Welcome To Ai Studio
                         </h1>
 
-                        <div className='hoz-same-item-align gap-0 py-3 px-4 my-0 max-w-2xl w-full bg-hoverC rounded-[30px] max435:absolute max435:bottom-1 z-[5] h-max'>
+                        <div className='hoz-same-item-align gap-0 py-3 px-4 my-0 max-w-2xl w-full bg-hoverC rounded-[30px] max435:fixed max435:bottom-1 z-[5] h-max'>
                             <textarea
                                 className="flex-1 bg-transparent border-none focus:outline-none focus:border-none resize-none w-full min-w-0 min-h-max p-0"
                                 placeholder="Type your prompt here..."
@@ -250,6 +251,7 @@ const Home = ({ openSidebar }) => {
 
                         </div>
 
+                    </div>
                     </div>
                 </div>
 
