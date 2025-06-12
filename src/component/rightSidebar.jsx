@@ -4,6 +4,7 @@ import { useApp } from '../contextApi/createContext';
 
 const RightSidebar = ({ className = '', iconOnly = false }) => {
   const {isSidebarOpen, setSidebarOpen } = useApp();
+
   return (
     <div className={`min-w-16 w-full h-full flex flex-col justify-start gap-4 items-center ${className} `}>
       <IcButton

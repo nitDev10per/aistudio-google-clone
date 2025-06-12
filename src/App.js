@@ -9,11 +9,12 @@ import useOutSideClick from './hooks/useOutSideClick.js';
 import RightSidebar from './component/rightSidebar.jsx';
 import Dashboard from './pages/dashboard.jsx';
 import Logo from './component/logo.jsx';
+import { useApp } from './contextApi/createContext.js';
 
 function App() {
   const [openSidebar, setOpenSidebar] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [studio, setStudio] = useState(true);
+  const { currentPage, setCurrentPage } = useApp();
   const width = useWindowWidth();
   const elementRef = useOutSideClick(() => {
     if (
@@ -68,10 +69,10 @@ function App() {
       </div>
       <div className='h-full flex-1 w-full flex flex-col justify-start items-center'>
         {/* top bar */}
-        <Topbar onMenuClick={handleMenuClick} setStudio={setStudio}/>
+        <Topbar onMenuClick={handleMenuClick} />
         {/* main content */}
         <div className='w-full h-full flex-1 flex justify-center items-center relative overflow-hidden'>
-          {studio? <Home openSidebar={openSidebar}/> : <Dashboard/>}
+          {currentPage==='studio'? <Home openSidebar={openSidebar}/> : <Dashboard/>}
           <RightSidebar className='max-w-16 onResponsiveRightSift' iconOnly={true} />
 
         </div>

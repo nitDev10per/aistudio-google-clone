@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import * as Icons from "lucide-react";
-import icons from '../json/icons';
+import icons from '../data/icons';
 
 const IcButton = ({ icon, name, iconOnly = true, clicked = false, onClick = () => { }, className = '' }) => {
   const [hover, setHover] = useState(false);

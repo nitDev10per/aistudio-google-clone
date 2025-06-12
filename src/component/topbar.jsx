@@ -2,9 +2,10 @@ import React, { use } from 'react'
 import IcButton from './icButton'
 import { useApp } from '../contextApi/createContext';
 import useWindowWidth from '../hooks/useWindowWirth';
+import { Link } from 'lucide-react';
 
-const Topbar = ({ onMenuClick, setStudio }) => {
-  const {isSidebarOpen, setSidebarOpen } = useApp();
+const Topbar = ({ onMenuClick }) => {
+  const {isSidebarOpen, setSidebarOpen, currentPage, setCurrentPage } = useApp();
   const width = useWindowWidth();
 
   return (
@@ -27,9 +28,11 @@ const Topbar = ({ onMenuClick, setStudio }) => {
           }}
           className='w-max'
         />}
-        {width > 768 && <button onClick={()=>{setStudio(true)}}>Studio</button>}
-        {width > 768 && <button onClick={()=>{setStudio(false)}}>Dashboard</button>}
-        {width > 768 && <button>Documentation</button>}
+        {width > 768 && <button onClick={()=>{setCurrentPage('studio')}} className={`${currentPage==='studio' && 'text-white'} hover:text-white`}>Studio</button>}
+        {width > 768 && <button onClick={()=>{setCurrentPage('dashboard')}} className={`${currentPage==='dashboard' && 'text-white'} hover:text-white`}>Dashboard</button>}
+        {width > 768 && <button onClick={()=>{
+          window.open('https://ai.google.dev/gemini-api/docs', '_blank', 'noopener noreferrer')
+        }} className={`hover:text-white flex items-center gap-1`}>Documentation <Link className='w-4 h-4'/></button>}
         {width <= 768 && <IcButton
           icon={'Edit'}
           name={'Edit'}

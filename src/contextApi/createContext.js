@@ -6,6 +6,7 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [isSidePenalOpen, setIsSidePenalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState('studio');
   const [theme, setTheme] = useState('light');
   const [user, setUser] = useState(null);
 
@@ -14,6 +15,7 @@ export const AppProvider = ({ children }) => {
       // State values
       isSidebarOpen, setSidebarOpen,
       isSidePenalOpen, setIsSidePenalOpen,
+      currentPage, setCurrentPage,
       theme, setTheme,
       user, setUser
     }}>

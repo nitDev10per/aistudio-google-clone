@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import IcButton from './icButton'
 import OpenFeaturesList from './openFeaturesList'
 import useWindowWidth from '../hooks/useWindowWirth'
+import { useApp } from '../contextApi/createContext'
 
 const Sidebar = ({ className = '', iconOnly = false }) => {
   const [selectedButton, setSelectedButton] = useState('Chat')
+  const { setCurrentPage, currentPage } = useApp()
   const width = useWindowWidth()
 
   const studio = [
@@ -56,20 +58,37 @@ const Sidebar = ({ className = '', iconOnly = false }) => {
 
     <div className='vtl-diff-items-align w-full mb-16 max769:mb-5  h-full min-h-max max769:border-b max769:border-hoverC pb-3'>
       <div className={`min-w-16 w-full h-max vtl-same-item-align justify-start ${className} `}>
-        {width >= 768 && studio.map((item, i) => (
+        {width >= 768 && currentPage==='studio' && studio.map((item, i) => (
           <IcButton
             key={i+'studio'}
             icon={item.icon}
             name={item.name}
             iconOnly={iconOnly}
             clicked={item.name == selectedButton}
-            onClick={() => { handleClicked(item.name) }}
+            onClick={() => { handleClicked(item.name) 
+              setCurrentPage('studio')
+            }}
+          />
+        )) }
+        {width >= 768 && currentPage==='dashboard' && Dashboard.map((item, i) => (
+          <IcButton
+            key={i+'deshboard'}
+            icon={item.icon}
+            name={item.name}
+            iconOnly={iconOnly}
+            clicked={item.name == selectedButton}
+            onClick={() => { handleClicked(item.name) 
+              setCurrentPage('dashboard')
+            }}
           />
         )) }
         {width < 768 && <OpenFeaturesList
           items={studio}
           navButtonType={true}
-          onClickButton={handleClicked}
+          onClickButton={(name)=>{
+            handleClicked(name)
+            setCurrentPage('studio')
+          }}
           title='Studio'
           openFeature={true}
           selectedButton={selectedButton}
@@ -78,7 +97,10 @@ const Sidebar = ({ className = '', iconOnly = false }) => {
         {width < 768 && <OpenFeaturesList
           items={Dashboard}
           navButtonType={true}
-          onClickButton={handleClicked}
+          onClickButton={(name)=>{
+            handleClicked(name)
+            setCurrentPage('dashboard')
+          }}
           title='Dashboard'
           openFeature={true}
           selectedButton={selectedButton}

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Card from '../component/card'
 import IcButton from '../component/icButton'
 import OpenFeaturesList from '../component/openFeaturesList'
@@ -9,11 +9,30 @@ import useOutSideClick from '../hooks/useOutSideClick'
 import useWindowWidth from '../hooks/useWindowWirth'
 import SidePenal from '../component/sidePenal'
 import RunSettings from '../component/runSetting'
+import { button, cardData, items, promptsGalleryData } from '../data/dummyData'
 
 const Home = ({ openSidebar }) => {
     const { isSidebarOpen, setSidebarOpen } = useApp();
+    const ariatextRef = useRef()
     const width = useWindowWidth();
     const [inputValue, setInputValue] = useState('');
+
+   const adjustTextareaHeight = () => {
+    const textarea = ariatextRef.current;
+    if (!textarea) return;
+
+    textarea.style.height = 'auto'; // reset
+    const scrollHeight = textarea.scrollHeight;
+    const maxHeight = 120; // Approx height of 5 lines (5 * 24px)
+
+    textarea.style.overflowY = scrollHeight > maxHeight ? 'auto' : 'hidden';
+    textarea.style.height = `${Math.min(scrollHeight, maxHeight)}px`;
+  };
+
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [inputValue]);
+
     const elementRef = useOutSideClick(() => {
         if (
             width <= 768
@@ -34,120 +53,13 @@ const Home = ({ openSidebar }) => {
         ['toggle', <ToggleButton />],
     ]);
 
-    const button = [
-        'System instructions',
-        'Get SDK code to chat with Gemini',
-        'You need to create and run a prompt in order to share it',
-        'No changes to save',
-        'Compare mode',
-        'Clear chat',
-        'View more actions'
-    ]
-
-
-    const cardData = [
-        {
-            title: 'Native speech generation',
-            decs: 'Generate high quality text to speech with Gemini',
-            img: 'https://www.gstatic.com/aistudio/zero-state/text_soundswave.png'
-        },
-        {
-            title: 'Native speech generation',
-            decs: 'Generate high quality text to speech with Gemini',
-            img: 'https://www.gstatic.com/aistudio/zero-state/text_soundswave.png'
-        },
-        {
-            title: 'Native speech generation',
-            decs: 'Generate high quality text to speech with Gemini',
-            img: 'https://www.gstatic.com/aistudio/zero-state/text_soundswave.png'
-        },
-        {
-            title: 'Native speech generation',
-            decs: 'Generate high quality text to speech with Gemini',
-            img: 'https://www.gstatic.com/aistudio/zero-state/text_soundswave.png'
-        },
-    ]
-
-    const items = [
-        {
-            type: 'single',
-            data: [{
-                actions: [{ type: 'select' }],
-            }, {
-                sideLabel: 'Token count',
-                actions: [{ type: 'text' }],
-            }, {
-                topLabel: 'Temperature',
-                actions: [
-                    { type: 'range' }
-                ],
-            }]
-        },
-        {
-            title: 'Thinking',
-            type: 'single',
-            data: [{
-                sideLabel: 'Thinking mode',
-                actions: [{ type: 'toggle' }],
-            }, {
-                sideLabel: 'Set thinking budget',
-                actions: [{ type: 'toggle' }],
-            }]
-        },
-        {
-            title: 'Tools',
-            type: 'wrap',
-            data: [{
-                sideLabel: 'Structured output',
-                actions: [{ type: 'button' }, { type: 'toggle' }],
-            }, {
-                sideLabel: 'Code execution',
-                actions: [{ type: 'toggle' }],
-            }, {
-                sideLabel: 'Function calling',
-                actions: [{ type: 'button' }, { type: 'toggle' }],
-            }, {
-                sideLabel: 'Grounding with Google Search',
-                actions: [{ type: 'toggle' }],
-            }, {
-                sideLabel: 'URL context',
-                actions: [{ type: 'toggle' }],
-            }]
-        },
-        {
-            title: 'Advanced settings',
-            type: 'wrap',
-            data: [{
-                sideLabel: 'Safety settings',
-                actions: [{ type: 'button' }],
-            }, {
-                sideLabel: 'Add Stop Sequences',
-                actions: [{ type: 'toggle' }],
-            }, {
-                topLabel: 'Add step sequences',
-                actions: [{ type: 'input' }],
-            }, {
-                sideLabel: 'output length',
-                actions: [{ type: 'number' }],
-            }, {
-                topLabel: 'Top P',
-                actions: [{ type: 'range' }],
-            }]
-        },
-
-    ];
-
-    const promptsGalleryData = [
-        'Test if AI knows which number is bigger.',
-        'Test if AI knows which number is bigger.',
-        'Test if AI knows which number is bigger.',
-        'Test if AI knows which number is bigger.',
-        'Test if AI knows which number is bigger.',
-
-    ]
 
     const penalContent = useCallback(() => {
-        if (isSidebarOpen === 'setting') {
+        if (isSidebarOpen === 'penal') {
+            return promptsGalleryData.map((item, idx) => {
+                return <Card desc={item} key={idx + 'promptsGalleryData'} className={'max-h-max'} />
+            })
+        } else {
             return <>
                 {
                     items.map((item, idx) => {
@@ -182,10 +94,6 @@ const Home = ({ openSidebar }) => {
 
                 }
             </>
-        } else {
-            return promptsGalleryData.map((item, idx) => {
-                return <Card desc={item} key={idx + 'promptsGalleryData'} className={'max-h-max'} />
-            })
         }
 
     }, [isSidebarOpen])
@@ -221,10 +129,14 @@ const Home = ({ openSidebar }) => {
 
                         <div className='hoz-same-item-align gap-0 py-3 px-4 mx-[20px] my-0 max-w-2xl w-full bg-hoverC rounded-[30px] max435:fixed max435:bottom-1 z-[5] h-max'>
                             <textarea
-                                className="flex-1 bg-transparent border-none focus:outline-none focus:border-none resize-none w-full min-w-0 min-h-max p-0"
+                                ref={ariatextRef}
+                                className="flex-1 bg-transparent border-none focus:outline-none focus:border-none resize-none w-full min-w-0 p-0"
                                 placeholder="Type your prompt here..."
                                 rows={1}
-                                onChange={(e) => setInputValue(e.target.value)}
+                                onChange={(e) => {
+
+                                    setInputValue(e.target.value)
+                                }}
                                 value={inputValue}
                             />
                             <IcButton
