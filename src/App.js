@@ -56,6 +56,7 @@ function App() {
           {openSidebar? <h1 className='text-buttonC text-xl font-medium'>Google AI Studio</h1>: <Logo/>}
         </div>
         <Sidebar iconOnly={openSidebar ? false : true} />
+        {/* open close sidebar btn*/}
         <div className='h-min w-min bg-cardC rounded-3xl absolute bottom-10 right-0 translate-x-[50%] z-10 max769:hidden'>
           <IcButton className='mr-4' onClick={handleSidebarToggle} name={!openSidebar ? 'arrowR' : 'arrowL'} clicked={false}/>
         </div>

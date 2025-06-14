@@ -19,6 +19,7 @@ const RightSidebar = ({ className = '', iconOnly = false }) => {
             setSidebarOpen('setting')
           }
         }}
+        tooltip={'left'}
       />
       <IcButton
         icon={'Structured Output'}
@@ -32,6 +33,7 @@ const RightSidebar = ({ className = '', iconOnly = false }) => {
             setSidebarOpen('penal')
           }
         }}
+        tooltip={'left'}
       />
       
     </div>

@@ -68,6 +68,7 @@ const Sidebar = ({ className = '', iconOnly = false }) => {
             onClick={() => { handleClicked(item.name) 
               setCurrentPage('studio')
             }}
+            tooltip={'right'}
           />
         )) }
         {width >= 768 && currentPage==='dashboard' && Dashboard.map((item, i) => (
@@ -80,6 +81,7 @@ const Sidebar = ({ className = '', iconOnly = false }) => {
             onClick={() => { handleClicked(item.name) 
               setCurrentPage('dashboard')
             }}
+            tooltip={'right'}
           />
         )) }
         {width < 768 && <OpenFeaturesList

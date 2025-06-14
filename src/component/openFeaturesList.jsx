@@ -52,6 +52,7 @@ const OpenFeaturesList = ({items, title='', openFeature=true, navButtonType=fals
               ))}
             </div>
           </div> : 
+          // when need only buttons
           <IcButton
            icon={item.icon}
            name={item.name}

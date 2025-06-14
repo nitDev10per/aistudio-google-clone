@@ -116,6 +116,7 @@ const Home = ({ openSidebar }) => {
                                 iconOnly={true}
                                 clicked={false}
                                 className='max769:hidden'
+                                tooltip={'bottom'}
                             />
                         })}
                     </div>
